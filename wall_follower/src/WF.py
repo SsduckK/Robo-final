@@ -19,9 +19,10 @@ class WallFollower:
         right_behind = average(scan.ranges[230:240])
         pointright = scan.ranges[270]
         self.count += 1
-        print('Forward', forward, '\nR:', right, 'fR:', right_forward,
-              'bR:', right_behind, '\npR:', pointright)
-        print(self.count)
+        if self.count % 10 == 0:
+            print('Forward', forward, '\nR:', right, 'fR:', right_forward,
+                  'bR:', right_behind, '\npR:', pointright)
+            print(self.count)
 
 
 
