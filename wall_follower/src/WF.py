@@ -20,11 +20,14 @@ class WallFollower:
         pointright = scan.ranges[270]
 
         # angular z = rad/s -> 초당 약 57도 회전을 의미한다.
-        turtle_vel.linear.x = 0.18
-        turtle_vel.angular.z = 0
 
-        if forward > 0.3:
-            if 0.2 < right < 0.25:
+
+        if forward > 0.25:
+            if right > 0.5 and right_forward > 0.5 and right_behind > 0.5:
+                turtle_vel.linear.x = 0.18
+                turtle_vel.angular.z = 0
+
+            elif 0.18 < right < 0.23:
                 if right_forward > right_behind:
                    turtle_vel.linear.x = 0.15
                    turtle_vel.angular.z = -0.3
@@ -32,16 +35,31 @@ class WallFollower:
                    turtle_vel.linear.x = 0.15
                    turtle_vel.angular.z = 0.3
 
+            elif right_forward < 0.17:
+                turtle_vel.linear.x = 0.1
+                turtle_vel.angular.z = 0.5
+
+            # elif right < 0.2 or right_forward < 0.2 or right_behind < 0.2:
+            #     if right_forward > right_behind:
+            #        turtle_vel.linear.x = 0.1
+            #        turtle_vel.angular.z = -0.5
+            #     elif right_behind > right_forward:
+            #        turtle_vel.linear.x = 0.1
+            #        turtle_vel.angular.z = 0.5
+
+
             elif 0.5 < right_forward or right_forward == 0:
                 turtle_vel.linear.x = 0.1
-                turtle_vel.angular.z = -1.2
+                turtle_vel.angular.z = -1.5
 
             else:
                 turtle_vel.linear.x = 0.18
                 turtle_vel.angular.z = 0
         else:
             turtle_vel.linear.x = 0.1
-            turtle_vel.angular.z = 1.2
+            turtle_vel.angular.z = 2
+
+
         self.publisher.publish(turtle_vel)
 
         self.count += 1
