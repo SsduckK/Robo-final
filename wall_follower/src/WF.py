@@ -23,18 +23,25 @@ class WallFollower:
         turtle_vel.linear.x = 0.18
         turtle_vel.angular.z = 0
 
-        if 0.2 < right < 0.25:
-            if right_forward > right_behind:
-               turtle_vel.linear.x = 0.15
-               turtle_vel.angular.z = -0.3
-            elif right_behind > right_forward:
-               turtle_vel.linear.x = 0.15
-               turtle_vel.angular.z = 0.3
+        if forward > 0.3:
+            if 0.2 < right < 0.25:
+                if right_forward > right_behind:
+                   turtle_vel.linear.x = 0.15
+                   turtle_vel.angular.z = -0.3
+                elif right_behind > right_forward:
+                   turtle_vel.linear.x = 0.15
+                   turtle_vel.angular.z = 0.3
 
-        elif right_forward > 0.5 or right_forward == 0:
+            elif 0.5 < right_forward or right_forward == 0:
+                turtle_vel.linear.x = 0.1
+                turtle_vel.angular.z = -1.2
+
+            else:
+                turtle_vel.linear.x = 0.18
+                turtle_vel.angular.z = 0
+        else:
             turtle_vel.linear.x = 0.1
-            turtle_vel.angular.z = -1
-
+            turtle_vel.angular.z = 1.2
         self.publisher.publish(turtle_vel)
 
         self.count += 1
@@ -42,8 +49,6 @@ class WallFollower:
             print('Forward', forward, '\nR:', right, 'fR:', right_forward,
                   'bR:', right_behind, '\npR:', pointright)
             print(self.count)
-
-
 
 
 def average(some_list):
