@@ -34,7 +34,7 @@ class WallFollower:
                     turtle_vel.linear.x = 0.15
                     turtle_vel.angular.z = 0.3
 
-            elif right_forward < 0.17:
+            elif right_forward < 0.15:
                 turtle_vel.linear.x = 0.1
                 turtle_vel.angular.z = 0.5
 
